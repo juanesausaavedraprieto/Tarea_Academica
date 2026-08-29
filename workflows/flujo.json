@@ -1,0 +1,41 @@
+{
+  "name": "Procesamiento de Registro Entrante",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro-entrante",
+        "options": {}
+      },
+      "id": "96f73ddb-eafc-47cc-93f8-ca9aed4e167a",
+      "name": "1 - Webhook (Recibe Payload)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        320,
+        32
+      ],
+      "webhookId": "registro-entrante"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "1 - Webhook (Recibe Payload)": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c43386e0-ca6b-4185-b5c5-24516577d2e3",
+  "meta": {
+    "instanceId": "07615144515f90ab3b18fb47abbeabc61d744e3b0b0efb8405b3fe2ea8c8db29"
+  },
+  "nodeGroups": [],
+  "id": "g0m2DIPHpkyGwIPC",
+  "tags": []
+}
