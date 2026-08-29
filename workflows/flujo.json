@@ -78,6 +78,24 @@
         784,
         32
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://example.com/api/notificaciones",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "b9cdeea3-2e2f-4de9-a41a-37d9e0fbc740",
+      "name": "4 - Salida (Mock Notification)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1024,
+        32
+      ]
     }
   ],
   "pinData": {},
@@ -108,6 +126,17 @@
           }
         ]
       ]
+    },
+    "3 - Condición (status = urgente)": {
+      "main": [
+        [
+          {
+            "node": "4 - Salida (Mock Notification)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -115,7 +144,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "b00d3925-7769-451f-bd50-311a6e65e2e7",
+  "versionId": "3aae5d37-7a29-4ed7-9b3b-90839dfdc9dd",
   "meta": {
     "instanceId": "07615144515f90ab3b18fb47abbeabc61d744e3b0b0efb8405b3fe2ea8c8db29"
   },
