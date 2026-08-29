@@ -16,6 +16,35 @@
         32
       ],
       "webhookId": "registro-entrante"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Toma el payload del cuerpo del POST\nconst incoming = $input.item.json.body || $input.item.json || {};\n\n// 1) Validar UUID entrante. Si no es válido, se delega a la base de datos (ej. PostgreSQL).\nconst uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;\nlet uuid = incoming.uuid;\nif (!uuid || !uuidRegex.test(String(uuid))) {\n  uuid = null;\n}\n\n// 2) Limpiar payload: eliminar campos vacíos y valores duplicados\nconst cleaned = {};\nconst seenValues = new Set();\nfor (const [key, value] of Object.entries(incoming)) {\n  if (value === null || value === undefined || value === '') continue;\n  const signature = JSON.stringify(value);\n  if (seenValues.has(signature)) continue;\n  seenValues.add(signature);\n  cleaned[key] = value;\n}\n\n// 3) Asignar UUID solo si vino uno válido desde el origen\nif (uuid) {\n  cleaned.uuid = uuid;\n}\n\nreturn { json: cleaned };"
+      },
+      "id": "ef7de4e6-5d7b-41ec-9f5b-05f3a3857557",
+      "name": "2 - Lógica y Normalización",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro-entrante",
+        "options": {}
+      },
+      "id": "974770e1-6d2a-456d-8e84-d0595fc6dd27",
+      "name": "1 - Webhook (Recibe Payload)1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        304,
+        32
+      ],
+      "webhookId": "registro-entrante"
     }
   ],
   "pinData": {},
@@ -24,6 +53,22 @@
       "main": [
         []
       ]
+    },
+    "2 - Lógica y Normalización": {
+      "main": [
+        []
+      ]
+    },
+    "1 - Webhook (Recibe Payload)1": {
+      "main": [
+        [
+          {
+            "node": "2 - Lógica y Normalización",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -31,7 +76,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "c43386e0-ca6b-4185-b5c5-24516577d2e3",
+  "versionId": "83032e15-501e-4f2e-a268-62e97ac7f7f4",
   "meta": {
     "instanceId": "07615144515f90ab3b18fb47abbeabc61d744e3b0b0efb8405b3fe2ea8c8db29"
   },
