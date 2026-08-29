@@ -45,6 +45,39 @@
         32
       ],
       "webhookId": "registro-entrante"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond-status-urgente",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "urgente",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "42f370d4-31ae-4524-99e6-059ee87b515e",
+      "name": "3 - Condición (status = urgente)",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        784,
+        32
+      ]
     }
   ],
   "pinData": {},
@@ -56,7 +89,13 @@
     },
     "2 - Lógica y Normalización": {
       "main": [
-        []
+        [
+          {
+            "node": "3 - Condición (status = urgente)",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "1 - Webhook (Recibe Payload)1": {
@@ -76,7 +115,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "83032e15-501e-4f2e-a268-62e97ac7f7f4",
+  "versionId": "b00d3925-7769-451f-bd50-311a6e65e2e7",
   "meta": {
     "instanceId": "07615144515f90ab3b18fb47abbeabc61d744e3b0b0efb8405b3fe2ea8c8db29"
   },
